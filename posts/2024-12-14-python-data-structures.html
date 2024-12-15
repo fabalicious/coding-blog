@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Data Structures: A Deep Dive into Lists - Coding Blog</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-brand">Coding Blog</div>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../index.html#articles">Articles</a></li>
+                <li><a href="../index.html#about">About</a></li>
+                <li><button id="theme-toggle" aria-label="Toggle dark mode">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <article class="blog-post" data-tags="python,tutorial,best-practices">
+            <h1>Python Data Structures: A Deep Dive into Lists</h1>
+            <div class="post-meta">
+                Posted on December 14, 2024
+                <div class="tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">Tutorial</span>
+                    <span class="tag">Best Practices</span>
+                </div>
+            </div>
+            
+            <p>Python lists are versatile data structures that can store multiple items in a single variable. Let's explore some common operations and best practices.</p>
+            
+            <h2>List Comprehensions</h2>
+            <p>List comprehensions provide a concise way to create lists:</p>
+            
+            <pre><code class="language-python"># Traditional way
+squares = []
+for x in range(10):
+    squares.append(x**2)
+
+# Using list comprehension
+squares = [x**2 for x in range(10)]
+
+# Conditional list comprehension
+even_squares = [x**2 for x in range(10) if x % 2 == 0]
+print(even_squares)  # Output: [0, 4, 16, 36, 64]</code></pre>
+
+            <h2>Common List Operations</h2>
+            <pre><code class="language-python"># List slicing
+numbers = [0, 1, 2, 3, 4, 5]
+print(numbers[2:4])    # Output: [2, 3]
+print(numbers[::-1])   # Reverse the list
+
+# List methods
+numbers.append(6)      # Add element to end
+numbers.insert(0, -1)  # Insert at specific position
+numbers.pop()         # Remove and return last element</code></pre>
+        </article>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Coding Blog. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="../script.js"></script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic CSS Animations</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-brand">Coding Blog</div>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../index.html#articles">Articles</a></li>
+                <li><a href="../index.html#about">About</a></li>
+                <li><button id="theme-toggle" aria-label="Toggle dark mode">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <article class="blog-post" data-tags="css,best-practices">
+            <h1>Basic CSS Animations</h1>
+            <div class="post-meta">
+                Posted on December 16, 2024
+                <div class="tags">
+                    <span class="tag">CSS</span>
+                    <span class="tag">Best Practices</span>
+                </div>
+            </div>
+
+            <div class="demo-container">
+                <div class="demo-loader"></div>
+            </div>
+
+            <h2>How-To</h2>
+            <ul>
+                <li>Draw a circle in CSS</li>
+                <li>Define and use CSS variables</li>
+                <li>CSS animation using keyframes</li>
+                <li>Using background position for CSS animations</li>
+                <li>CSS radial gradient</li>
+            </ul>
+            
+            <h2>HTML</h2>
+            <pre><code class="language-html">&lt;div class="loader"&gt;&lt;/div&gt;</code></pre>
+
+            <h2>CSS</h2>
+            <pre><code class="language-css">:root {
+    /* Loader colors */
+    --loader-color-1: #D1BFAD;
+    --loader-color-2: #C696FF;
+    --loader-color-3: #F5F0EC;
+    --loader-color-4: #6EC86E;
+    --loader-bg: #000000;
+}
+
+.loader {
+    width: 40px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background:
+      radial-gradient(farthest-side, var(--loader-color-1) 94%, #0000),
+      radial-gradient(farthest-side, var(--loader-color-2) 94%, #0000),
+      radial-gradient(farthest-side, var(--loader-color-3) 94%, #0000),
+      radial-gradient(farthest-side, var(--loader-color-4) 94%, #0000),
+      var(--loader-bg);
+    background-size: 105% 105%;
+    background-repeat: no-repeat;
+    animation: l5 2s infinite; 
+}
+
+@keyframes l5 {
+    0%  {background-position: 50% -50px,-40px 50%, 50% calc(100% + 50px),calc(100% + 50px) 50%}
+    20%,
+    25% {background-position: 50% -50px,-50px 50%, 50% calc(100% + 50px),50% 50%}
+    45%,
+    50% {background-position: 50% -50px,-50px 50%, 50% 50%              ,50% 50%}
+    75%,
+    75% {background-position: 50% -50px, 50%  50%, 50% 50%              ,50% 50%}
+    95%,
+    100%{background-position: 50%  50% , 50%  50%, 50% 50%              ,50% 50%}
+}</code></pre>
+
+
+        </article>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Coding Blog. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+    <script src="../script.js"></script>
+</body>
+</html>

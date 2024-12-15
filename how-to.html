@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How-To Guide - Coding Blog</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-brand">Coding Blog</div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#articles">Articles</a></li>
+                <li><a href="how-to.html" class="active">How-To</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><button id="theme-toggle" aria-label="Toggle dark mode">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>How-To Guide</h1>
+        <p>A collection of practical how-to guides from all articles. Click on any guide to read the full article.</p>
+
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Search how-to guides...">
+            <div class="filter-tags">
+                <span class="filter-label">Filter by:</span>
+            </div>
+        </div>
+
+        <div id="how-to-container">
+            <div class="how-to-list">
+                <div class="how-to-item">
+                    <h2>CSS Animations</h2>
+                    <ul>
+                        <li>
+                            <a href="posts/2024-12-16-echo-tango-css-animation.html">Draw a circle in CSS</a>
+                            <div class="tags">
+                                <span class="tag">CSS</span>
+                                <span class="tag">Best Practices</span>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="posts/2024-12-16-echo-tango-css-animation.html">Define and use CSS variables</a>
+                            <div class="tags">
+                                <span class="tag">CSS</span>
+                                <span class="tag">Best Practices</span>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="posts/2024-12-16-echo-tango-css-animation.html">CSS animation using keyframes</a>
+                            <div class="tags">
+                                <span class="tag">CSS</span>
+                                <span class="tag">Best Practices</span>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="posts/2024-12-16-echo-tango-css-animation.html">Using background position for CSS animations</a>
+                            <div class="tags">
+                                <span class="tag">CSS</span>
+                                <span class="tag">Best Practices</span>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="posts/2024-12-16-echo-tango-css-animation.html">CSS radial gradient</a>
+                            <div class="tags">
+                                <span class="tag">CSS</span>
+                                <span class="tag">Best Practices</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Coding Blog. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-python.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
