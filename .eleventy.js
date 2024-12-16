@@ -33,9 +33,13 @@ module.exports = function(eleventyConfig) {
         });
     });
 
+    // Add link preview shortcode
+    eleventyConfig.addAsyncShortcode("linkPreview", require("./_11ty/shortcodes/link-preview"));
+
     // Add watch targets
     eleventyConfig.addWatchTarget("./src/css/");
     eleventyConfig.addWatchTarget("./src/js/");
+    eleventyConfig.addWatchTarget("./src/css/link-preview.css");
 
     return {
         dir: {

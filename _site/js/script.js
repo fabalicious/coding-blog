@@ -47,6 +47,42 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    // Page transition functionality
+    document.addEventListener('click', function(e) {
+        // Only handle clicks on navigation links
+        const link = e.target.closest('a');
+        if (!link || link.closest('header') === null) return;
+
+        // Don't handle external links or hash links
+        if (
+            link.hostname !== window.location.hostname ||
+            link.getAttribute('href').startsWith('#') ||
+            link.getAttribute('target') === '_blank'
+        ) return;
+
+        e.preventDefault();
+        const targetUrl = link.href;
+        
+        // Fade out
+        const main = document.querySelector('main');
+        main.classList.add('fade-out');
+        
+        // Wait for fade out animation
+        setTimeout(() => {
+            window.location.href = targetUrl;
+        }, 200); // Match this with the CSS transition duration
+    });
+
+    // Handle browser back/forward buttons
+    window.addEventListener('popstate', function(e) {
+        const main = document.querySelector('main');
+        main.classList.add('fade-out');
+        
+        setTimeout(() => {
+            window.location.reload();
+        }, 200);
+    });
+
     // Search and filter functionality
     const searchInput = document.getElementById('search-input');
     const filterTagsContainer = document.querySelector('.filter-tags');

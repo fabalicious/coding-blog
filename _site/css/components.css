@@ -198,6 +198,33 @@ nav .nav-search input::placeholder {
     justify-content: flex-end;
 }
 
+/* Page Transitions */
+main {
+    opacity: 1;
+    transition: opacity 0.2s ease-in-out;
+}
+
+main.fade-out {
+    opacity: 0;
+}
+
+main.fade-in {
+    opacity: 1;
+}
+
+.page-content {
+    animation: fadeIn 0.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
 /* Loader */
 .loader-container {
     display: flex;
