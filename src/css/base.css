@@ -12,6 +12,11 @@
     --loader-bg: #000000;
 }
 
+html {
+    scroll-behavior: smooth;
+    overflow-y: scroll; /* Always show vertical scrollbar */
+}
+
 body {
     font-family: 'Inter', sans-serif;
     line-height: 1.6;
