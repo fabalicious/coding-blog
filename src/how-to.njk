@@ -1,0 +1,36 @@
+---
+layout: base.njk
+title: How-To Guide
+---
+
+<h1>How-To Guide</h1>
+<p>A collection of practical how-to guides from all articles. Click on any guide to read the full article.</p>
+
+<div class="search-container">
+    <input type="text" id="search-input" placeholder="Search how-to guides...">
+    <div class="filter-tags">
+        <span class="filter-label">Filter by:</span>
+    </div>
+</div>
+
+<div id="how-to-container">
+    <div class="how-to-list">
+        {%- for post in collections.posts | reverse -%}
+        <div class="how-to-item">
+            <h2>{{ post.data.title }}</h2>
+            <ul>
+                {%- for guide in post.data.guides -%}
+                <li>
+                    <a href="{{ post.url }}#{{ guide.id }}">{{ guide.title }}</a>
+                    <div class="tags">
+                        {%- for tag in guide.tags -%}
+                        <span class="tag">{{ tag }}</span>
+                        {%- endfor -%}
+                    </div>
+                </li>
+                {%- endfor -%}
+            </ul>
+        </div>
+        {%- endfor -%}
+    </div>
+</div>

@@ -1,0 +1,45 @@
+:root {
+    --bg-color: #F6F5F1;
+    --text-color: #2d3748;
+    --code-bg: #2d3748;
+    --primary-color: #3269FF;
+    --secondary-color: #718096;
+    --border-color: #e2e8f0;
+    --loader-color-1: #D1BFAD;
+    --loader-color-2: #C696FF;
+    --loader-color-3: #F5F0EC;
+    --loader-color-4: #6EC86E;
+    --loader-bg: #000000;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+h2 {
+    font-size: 1.8rem;
+    margin-top: 2rem;
+}
+
+footer {
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid var(--border-color);
+    color: var(--secondary-color);
+}

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Coding Blog</title>
+    <link rel="stylesheet" href="/styles/prism.css">
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/components.css">
+    <link rel="stylesheet" href="/css/code.css">
+    <link rel="stylesheet" href="/css/theme.css">
+    <link rel="stylesheet" href="/css/search.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+    <div class="nav-brand">Coding Blog</div>
+    <ul>
+        <li><a href="/" class="active">Home</a></li>
+        <li><a href="/how-to" >How-To</a></li>
+        <li class="nav-search">
+            <input type="search" 
+                   id="search-input" 
+                   placeholder="Search articles..." 
+                   aria-label="Search articles"
+                   data-search-type="article">
+        </li>
+        <li>
+            <button id="theme-toggle" aria-label="Toggle dark mode">
+                <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+                <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+            </button>
+        </li>
+    </ul>
+</nav>
+
+    </header>
+
+    <main>
+        
+<div class="blog-posts">
+    <h1>Latest Posts</h1><article class="blog-post-preview" data-tags="test">
+        <h2><a href="/posts/test/">Test Post</a></h2>
+        <div class="post-meta">
+            Posted on December 16, 2024
+            <div class="tags"><span class="tag">Test</span></div>
+        </div>
+        <p class="post-excerpt">A test post.</p>
+        <a href="/posts/test/" class="read-more">Read More →</a>
+    </article><article class="blog-post-preview" data-tags="css,best practices">
+        <h2><a href="/posts/2024-12-16-echo-tango-css-animation/">Basic CSS Animations</a></h2>
+        <div class="post-meta">
+            Posted on December 16, 2024
+            <div class="tags"><span class="tag">CSS</span><span class="tag">Best Practices</span></div>
+        </div>
+        <p class="post-excerpt">Learn about CSS animations and how to create them effectively.</p>
+        <a href="/posts/2024-12-16-echo-tango-css-animation/" class="read-more">Read More →</a>
+    </article><article class="blog-post-preview" data-tags="javascript,tutorial">
+        <h2><a href="/posts/2024-12-15-welcome-to-my-coding-blog/">Welcome to My Coding Blog</a></h2>
+        <div class="post-meta">
+            Posted on December 15, 2024
+            <div class="tags"><span class="tag">JavaScript</span><span class="tag">Tutorial</span></div>
+        </div>
+        <p class="post-excerpt">Welcome to my coding blog! Here, I&#39;ll share insights, tutorials, and best practices about programming.</p>
+        <a href="/posts/2024-12-15-welcome-to-my-coding-blog/" class="read-more">Read More →</a>
+    </article></div>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Coding Blog. All rights reserved.</p>
+    </footer>
+    
+    <script src="/js/script.js"></script>
+</body>
+</html>

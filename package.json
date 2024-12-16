@@ -1,0 +1,18 @@
+{
+  "name": "coding-blog",
+  "version": "1.0.0",
+  "description": "A modern, responsive blog focused on coding tutorials and best practices",
+  "scripts": {
+    "clean": "rm -rf _site",
+    "build": "npm run clean && eleventy",
+    "serve": "eleventy --serve",
+    "dev": "npm run clean && eleventy --serve --watch",
+    "debug": "DEBUG=Eleventy* eleventy"
+  },
+  "keywords": ["blog", "coding", "tutorials", "11ty", "static-site"],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@11ty/eleventy": "^2.0.1"
+  }
+}
