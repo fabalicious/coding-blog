@@ -8,24 +8,42 @@ document.addEventListener('DOMContentLoaded', function() {
     // Theme toggle functionality
     const themeToggle = document.getElementById('theme-toggle');
     const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    const html = document.documentElement;
+    
+    console.log('Initial theme state:', {
+        storedTheme: localStorage.getItem('theme'),
+        prefersDark: prefersDarkScheme.matches,
+        currentClasses: html.classList.toString()
+    });
     
     // Set initial theme
     if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && prefersDarkScheme.matches)) {
-        document.body.classList.add('dark-theme');
+        html.classList.add('dark-theme');
+        console.log('Setting initial dark theme');
     }
     
     // Theme toggle click handler
     if (themeToggle) {
+        console.log('Theme toggle button found');
         themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-theme');
-            localStorage.setItem('theme', document.body.classList.contains('dark-theme') ? 'dark' : 'light');
+            console.log('Theme toggle clicked');
+            html.classList.toggle('dark-theme');
+            const isDark = html.classList.contains('dark-theme');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            console.log('Theme toggled:', {
+                isDark,
+                currentClasses: html.classList.toString(),
+                storedTheme: localStorage.getItem('theme')
+            });
         });
+    } else {
+        console.log('Theme toggle button not found!');
     }
     
     // Listen for system theme changes
     prefersDarkScheme.addEventListener('change', (e) => {
         if (!localStorage.getItem('theme')) {
-            document.body.classList.toggle('dark-theme', e.matches);
+            html.classList.toggle('dark-theme', e.matches);
         }
     });
 
@@ -37,25 +55,28 @@ document.addEventListener('DOMContentLoaded', function() {
     // Get the appropriate container based on the current page
     const articlesContainer = document.getElementById('articles-container');
     const howToContainer = document.getElementById('how-to-container');
-    const isHowToPage = window.location.pathname.endsWith('how-to.html');
+    const isHowToPage = window.location.pathname.includes('how-to');
     
     // Function to collect all unique tags from the page
     function collectUniqueTags() {
         const tags = new Set(['all']); // Always include 'all'
+        const container = isHowToPage ? howToContainer : articlesContainer;
         
-        if (isHowToPage) {
-            // Collect tags from how-to items
-            document.querySelectorAll('.tag').forEach(tag => {
-                tags.add(tag.textContent.toLowerCase().trim());
-            });
-        } else {
-            // Collect tags from article previews
-            document.querySelectorAll('.blog-post-preview').forEach(article => {
-                if (article.dataset.tags) {
-                    const articleTags = article.dataset.tags.split(',');
-                    articleTags.forEach(tag => tags.add(tag.trim()));
-                }
-            });
+        if (container) {
+            if (isHowToPage) {
+                // Collect tags from how-to items
+                container.querySelectorAll('.tag').forEach(tag => {
+                    tags.add(tag.textContent.toLowerCase().trim());
+                });
+            } else {
+                // Collect tags from article previews
+                container.querySelectorAll('.blog-post-preview').forEach(article => {
+                    if (article.dataset.tags) {
+                        const articleTags = article.dataset.tags.split(',');
+                        articleTags.forEach(tag => tags.add(tag.trim()));
+                    }
+                });
+            }
         }
         
         return Array.from(tags).sort();
@@ -94,86 +115,61 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         // Set initial active state for 'All' filter
-        const allButton = document.querySelector('[data-tag="all"]');
+        const allButton = filterTagsContainer.querySelector('[data-tag="all"]');
         if (allButton) {
             allButton.classList.add('active');
         }
     }
 
-    // Filter items based on search input and active tag
+    // Function to filter items based on search input and active tag
     function filterItems() {
-        if (!searchInput) return;
-        
-        const searchTerm = searchInput.value.toLowerCase();
+        const container = isHowToPage ? howToContainer : articlesContainer;
+        if (!container) return;
+
+        const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
+        const items = isHowToPage ? 
+            container.querySelectorAll('.how-to-item') : 
+            container.querySelectorAll('.blog-post-preview');
+
         let hasVisibleItems = false;
 
-        if (isHowToPage) {
-            // Filter how-to items
-            document.querySelectorAll('.how-to-item').forEach(category => {
-                let categoryHasVisible = false;
-                
-                category.querySelectorAll('li').forEach(item => {
-                    const text = item.querySelector('a').textContent.toLowerCase();
-                    const tags = Array.from(item.querySelectorAll('.tag'))
-                        .map(tag => tag.textContent.toLowerCase().trim());
-                    
-                    const matchesSearch = text.includes(searchTerm);
-                    const matchesTag = activeTag === 'all' || tags.includes(activeTag.toLowerCase());
-                    
-                    if (matchesSearch && matchesTag) {
-                        item.style.display = 'flex';
-                        categoryHasVisible = true;
-                        hasVisibleItems = true;
-                    } else {
-                        item.style.display = 'none';
-                    }
-                });
-                
-                // Show/hide the entire category based on whether it has visible items
-                category.style.display = categoryHasVisible ? 'block' : 'none';
-            });
-        } else {
-            // Filter article previews
-            document.querySelectorAll('.blog-post-preview').forEach(article => {
-                const title = article.querySelector('h2 a').textContent.toLowerCase();
-                const content = article.textContent.toLowerCase();
-                const tags = article.dataset.tags ? article.dataset.tags.split(',').map(tag => tag.trim()) : [];
-                
-                const matchesSearch = title.includes(searchTerm) || content.includes(searchTerm);
-                const matchesTag = activeTag === 'all' || tags.includes(activeTag);
-                
-                if (matchesSearch && matchesTag) {
-                    article.style.display = 'block';
-                    hasVisibleItems = true;
-                } else {
-                    article.style.display = 'none';
-                }
-            });
-        }
+        items.forEach(item => {
+            const tags = item.dataset.tags ? item.dataset.tags.split(',') : [];
+            const title = item.querySelector('h2').textContent.toLowerCase();
+            const excerpt = item.querySelector('.post-excerpt')?.textContent.toLowerCase() || '';
+            
+            const matchesTag = activeTag === 'all' || tags.includes(activeTag);
+            const matchesSearch = searchTerm === '' || 
+                title.includes(searchTerm) || 
+                excerpt.includes(searchTerm);
+
+            const isVisible = matchesTag && matchesSearch;
+            item.style.display = isVisible ? 'block' : 'none';
+            if (isVisible) hasVisibleItems = true;
+        });
 
         // Show/hide no results message
-        const noResults = document.getElementById('no-results') || createNoResultsElement();
-        noResults.classList.toggle('hidden', hasVisibleItems);
-    }
-
-    // Create no results element if it doesn't exist
-    function createNoResultsElement() {
-        const noResults = document.createElement('div');
-        noResults.id = 'no-results';
-        noResults.className = 'hidden';
-        noResults.innerHTML = '<p>No items found matching your search criteria.</p>';
-        const container = isHowToPage ? howToContainer : articlesContainer;
-        if (container) {
-            container.appendChild(noResults);
+        const noResults = container.querySelector('.no-results');
+        if (!hasVisibleItems) {
+            if (!noResults) {
+                const message = document.createElement('p');
+                message.className = 'no-results';
+                message.textContent = 'No matching items found.';
+                container.appendChild(message);
+            }
+        } else if (noResults) {
+            noResults.remove();
         }
-        return noResults;
     }
 
     // Initialize search and filters
     if (searchInput) {
         searchInput.addEventListener('input', filterItems);
-        // Trigger initial filter to set up everything correctly
-        filterItems();
     }
-    generateTagFilters();
+    
+    // Initialize filters if container exists
+    if (filterTagsContainer) {
+        generateTagFilters();
+        filterItems(); // Initial filter
+    }
 });

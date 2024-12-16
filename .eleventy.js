@@ -1,4 +1,18 @@
+const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
+
 module.exports = function(eleventyConfig) {
+    // Add syntax highlighting plugin
+    eleventyConfig.addPlugin(syntaxHighlight, {
+        init: ({ Prism }) => {
+            Prism.languages.markdown = Prism.languages.extend('markup', {
+                'frontmatter': {
+                    pattern: /^---[\s\S]*?^---$/m,
+                    greedy: true
+                }
+            });
+        }
+    });
+
     // Copy static assets
     eleventyConfig.addPassthroughCopy("src/css");
     eleventyConfig.addPassthroughCopy("src/js");

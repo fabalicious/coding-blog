@@ -9,10 +9,17 @@
     "dev": "npm run clean && eleventy --serve --watch",
     "debug": "DEBUG=Eleventy* eleventy"
   },
-  "keywords": ["blog", "coding", "tutorials", "11ty", "static-site"],
+  "keywords": [
+    "blog",
+    "coding",
+    "tutorials",
+    "11ty",
+    "static-site"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@11ty/eleventy": "^2.0.1"
+    "@11ty/eleventy": "^2.0.1",
+    "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.0"
   }
 }

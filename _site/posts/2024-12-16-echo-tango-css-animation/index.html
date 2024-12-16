@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Basic CSS Animations - Coding Blog</title>
-    <link rel="stylesheet" href="/styles/prism.css">
     <link rel="stylesheet" href="/css/base.css">
     <link rel="stylesheet" href="/css/components.css">
     <link rel="stylesheet" href="/css/code.css">
@@ -56,57 +55,52 @@
     <p>In this post, we'll explore how to create effective CSS animations. We'll cover everything from basic keyframes to complex transitions.</p>
 <h2>Drawing a Circle in CSS</h2>
 <p>First, let's create a simple circle using CSS:</p>
-<pre><code class="language-css">.circle {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: var(--primary-color);
-}
-</code></pre>
+<pre class="language-css"><code class="language-css"><span class="token selector">.circle</span> <span class="token punctuation">{</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> 50px<span class="token punctuation">;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span> 50px<span class="token punctuation">;</span>
+    <span class="token property">border-radius</span><span class="token punctuation">:</span> 50%<span class="token punctuation">;</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> <span class="token function">var</span><span class="token punctuation">(</span>--primary-color<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
 <h2>CSS Variables</h2>
 <p>CSS variables (custom properties) are a powerful way to maintain consistent styling:</p>
-<pre><code class="language-css">:root {
-    --primary-color: #3269FF;
-    --bg-color: #F6F5F1;
-}
+<pre class="language-css"><code class="language-css"><span class="token selector">:root</span> <span class="token punctuation">{</span>
+    <span class="token property">--primary-color</span><span class="token punctuation">:</span> #3269FF<span class="token punctuation">;</span>
+    <span class="token property">--bg-color</span><span class="token punctuation">:</span> #F6F5F1<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-.element {
-    background: var(--bg-color);
-    color: var(--primary-color);
-}
-</code></pre>
+<span class="token selector">.element</span> <span class="token punctuation">{</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> <span class="token function">var</span><span class="token punctuation">(</span>--bg-color<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> <span class="token function">var</span><span class="token punctuation">(</span>--primary-color<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
 <h2>Animation with Keyframes</h2>
 <p>Here's how to create a rotation animation:</p>
-<pre><code class="language-css">@keyframes rotate {
-    0% { transform: rotate(0deg) }
-    100% { transform: rotate(360deg) }
-}
+<pre class="language-css"><code class="language-css"><span class="token atrule"><span class="token rule">@keyframes</span> rotate</span> <span class="token punctuation">{</span>
+    <span class="token selector">0%</span> <span class="token punctuation">{</span> <span class="token property">transform</span><span class="token punctuation">:</span> <span class="token function">rotate</span><span class="token punctuation">(</span>0deg<span class="token punctuation">)</span> <span class="token punctuation">}</span>
+    <span class="token selector">100%</span> <span class="token punctuation">{</span> <span class="token property">transform</span><span class="token punctuation">:</span> <span class="token function">rotate</span><span class="token punctuation">(</span>360deg<span class="token punctuation">)</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
-.rotating-element {
-    animation: rotate 2s linear infinite;
-}
-</code></pre>
+<span class="token selector">.rotating-element</span> <span class="token punctuation">{</span>
+    <span class="token property">animation</span><span class="token punctuation">:</span> rotate 2s linear infinite<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
 <h2>Background Position Animation</h2>
 <p>You can create interesting effects by animating background position:</p>
-<pre><code class="language-css">.moving-background {
-    background: linear-gradient(45deg, #3269FF, #F6F5F1);
-    animation: moveBackground 10s linear infinite;
-}
+<pre class="language-css"><code class="language-css"><span class="token selector">.moving-background</span> <span class="token punctuation">{</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> <span class="token function">linear-gradient</span><span class="token punctuation">(</span>45deg<span class="token punctuation">,</span> #3269FF<span class="token punctuation">,</span> #F6F5F1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token property">animation</span><span class="token punctuation">:</span> moveBackground 10s linear infinite<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-@keyframes moveBackground {
-    0% { background-position: 0% 0%; }
-    100% { background-position: 100% 100%; }
-}
-</code></pre>
+<span class="token atrule"><span class="token rule">@keyframes</span> moveBackground</span> <span class="token punctuation">{</span>
+    <span class="token selector">0%</span> <span class="token punctuation">{</span> <span class="token property">background-position</span><span class="token punctuation">:</span> 0% 0%<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token selector">100%</span> <span class="token punctuation">{</span> <span class="token property">background-position</span><span class="token punctuation">:</span> 100% 100%<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
 <h2>Radial Gradients</h2>
 <p>Create beautiful circular gradients:</p>
-<pre><code class="language-css">.radial-gradient {
-    background: radial-gradient(circle at center,
-        var(--primary-color) 0%,
-        var(--bg-color) 100%
-    );
-}
-</code></pre>
+<pre class="language-css"><code class="language-css"><span class="token selector">.radial-gradient</span> <span class="token punctuation">{</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> <span class="token function">radial-gradient</span><span class="token punctuation">(</span>circle at center<span class="token punctuation">,</span>
+        <span class="token function">var</span><span class="token punctuation">(</span>--primary-color<span class="token punctuation">)</span> 0%<span class="token punctuation">,</span>
+        <span class="token function">var</span><span class="token punctuation">(</span>--bg-color<span class="token punctuation">)</span> 100%
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
 
 </article>
 
