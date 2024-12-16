@@ -10,45 +10,34 @@ document.addEventListener('DOMContentLoaded', function() {
     const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
     const html = document.documentElement;
     
-    console.log('Initial theme state:', {
-        storedTheme: localStorage.getItem('theme'),
-        prefersDark: prefersDarkScheme.matches,
-        currentClasses: html.classList.toString()
-    });
-    
     // Set initial theme
-    if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && prefersDarkScheme.matches)) {
-        html.classList.add('dark-theme');
-        console.log('Setting initial dark theme');
-    }
+    const setTheme = (isDark) => {
+        html.setAttribute('data-theme', isDark ? 'dark' : 'light');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    };
+
+    // Initialize theme
+    const storedTheme = localStorage.getItem('theme');
+    const initialDark = storedTheme === 'dark' || (!storedTheme && prefersDarkScheme.matches);
+    setTheme(initialDark);
     
     // Theme toggle click handler
     if (themeToggle) {
-        console.log('Theme toggle button found');
         themeToggle.addEventListener('click', () => {
-            console.log('Theme toggle clicked');
-            html.classList.toggle('dark-theme');
-            const isDark = html.classList.contains('dark-theme');
-            localStorage.setItem('theme', isDark ? 'dark' : 'light');
-            console.log('Theme toggled:', {
-                isDark,
-                currentClasses: html.classList.toString(),
-                storedTheme: localStorage.getItem('theme')
-            });
+            const isDark = html.getAttribute('data-theme') !== 'dark';
+            setTheme(isDark);
         });
-    } else {
-        console.log('Theme toggle button not found!');
     }
     
     // Listen for system theme changes
     prefersDarkScheme.addEventListener('change', (e) => {
         if (!localStorage.getItem('theme')) {
-            html.classList.toggle('dark-theme', e.matches);
+            setTheme(e.matches);
         }
     });
 
     // Page transition functionality
-    document.addEventListener('click', function(e) {
+    document.addEventListener('click', async function(e) {
         // Only handle clicks on navigation links
         const link = e.target.closest('a');
         if (!link || link.closest('header') === null) return;
@@ -62,25 +51,50 @@ document.addEventListener('DOMContentLoaded', function() {
 
         e.preventDefault();
         const targetUrl = link.href;
-        
-        // Fade out
-        const main = document.querySelector('main');
-        main.classList.add('fade-out');
-        
-        // Wait for fade out animation
-        setTimeout(() => {
-            window.location.href = targetUrl;
-        }, 200); // Match this with the CSS transition duration
+
+        try {
+            // Fetch the new page content
+            const response = await fetch(targetUrl);
+            const text = await response.text();
+            const parser = new DOMParser();
+            const newDoc = parser.parseFromString(text, 'text/html');
+            
+            // Get the new main content
+            const newMain = newDoc.querySelector('main');
+            const currentMain = document.querySelector('main');
+            
+            // Add fade-out class to current content
+            currentMain.classList.add('fade-out');
+            
+            // After fade out, update content and URL
+            setTimeout(() => {
+                currentMain.innerHTML = newMain.innerHTML;
+                currentMain.classList.remove('fade-out');
+                history.pushState({}, '', targetUrl);
+                
+                // Reinitialize any necessary scripts
+                if (typeof Prism !== 'undefined') {
+                    Prism.highlightAll();
+                }
+                
+                // Reinitialize search and filters if they exist
+                const searchInput = document.getElementById('search-input');
+                if (searchInput) {
+                    searchInput.addEventListener('input', filterItems);
+                }
+                collectUniqueTags();
+                generateTagFilters();
+            }, 200);
+            
+        } catch (error) {
+            console.error('Error during page transition:', error);
+            window.location.href = targetUrl; // Fallback to normal navigation
+        }
     });
 
     // Handle browser back/forward buttons
     window.addEventListener('popstate', function(e) {
-        const main = document.querySelector('main');
-        main.classList.add('fade-out');
-        
-        setTimeout(() => {
-            window.location.reload();
-        }, 200);
+        window.location.reload();
     });
 
     // Search and filter functionality
